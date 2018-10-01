@@ -1,0 +1,26 @@
+{
+  "name": "connected",
+  "version": "0.4.0",
+  "description": "A visual experiment using connected particles",
+  "main": "index.html",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jttpo2/connected.git"
+  },
+  "author": "John Petersson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jttpo2/connected/issues"
+  },
+  "readme": "README.md",
+  "homepage": "https://github.com/Jttpo2/connected#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-livereload": "^3.8.1"
+  },
+  "jshintConfig": {
+    "esversion": 6
+  }
+}
