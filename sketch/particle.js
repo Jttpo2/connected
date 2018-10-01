@@ -1,18 +1,32 @@
 class Particle {
-  constructor(pos, vel, connectionDistance) {
+  constructor(id, pos, vel, connectionDistance, distancesMatrix) {
+    this.id = id;
+    this.connectedTo = [];
+    this.connectionDistance = connectionDistance
+
+    this.distancesMatrix = distancesMatrix; // Optimization: Every particle knows every other
+
     this.pos = pos;
     this.vel = vel;
     this.acc = createVector(0, 0);
     this.maxVel = 5;
 
-    this.size = 20;
-    this.mass = this.size * 2;
+    this.baseSize = 5;
+    this.size = this.calcSize();
+    this.mass = this.calcMass();
     this.color = color('white');
     this.connectionColor = this.color;
-    this.connectionWidth = 1;
+    this.connectionWidth = 0.3;
 
-    this.connectedTo = [];
-    this.connectionDistance = connectionDistance
+    this.minAttractionDistance = 0;
+  }
+
+  calcMass() {
+    return this.size * 2;
+  }
+
+  calcSize() {
+    return this.baseSize + this.connectedTo.length * 0.12;
   }
 
   applyForce(force) {
@@ -35,7 +49,7 @@ class Particle {
   }
 
   getDistanceTo(particle) {
-    return this.pos.dist(particle.pos);
+    return this.distancesMatrix[this.id][particle.id];
   }
 
   collideWith(particle) {
@@ -61,7 +75,7 @@ class Particle {
     let thatPos = that.pos.copy();
     let force = thatPos.sub(this.pos);
     let distance = force.mag();
-    distance = constrain(distance, this.size, 500);
+    distance = constrain(distance, this.minAttractionDistance, this.connectionDistance);
 
     let m = (G * this.mass * that.mass) / (distance**2);
     force.normalize();
@@ -71,10 +85,10 @@ class Particle {
 
   edges() {
     let pos = this.pos;
-    if (pos.x > width) pos.x = 0;
-    else if (pos.x < 0) pos.x = width;
-    if (pos.y > height) pos.y = 0;
-    else if (pos.y < 0) pos.y = height;
+    if (pos.x >= width) pos.x = 0;
+    else if (pos.x <= 0) pos.x = width;
+    if (pos.y >= height) pos.y = 0;
+    else if (pos.y <= 0) pos.y = height;
   }
 
   run() {
@@ -91,6 +105,9 @@ class Particle {
     this.edges();
 
     this.checkForConnectionEffects();
+    this.size = this.calcSize();
+    this.mass = this.calcMass();
+    this.minAttractionDistance = this.size * 2.5;
   }
 
   display() {
