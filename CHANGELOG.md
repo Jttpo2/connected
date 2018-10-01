@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.5.0] - 2018-10-01
+### Added
+- Optimization.
+- Sizing according to connections.
+
 ## [0.4.0] - 2018-10-01
 ### Added
 - Moving particles.
