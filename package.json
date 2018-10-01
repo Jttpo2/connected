@@ -1,7 +1,7 @@
 {
   "name": "connected",
-  "version": "0.3.0",
-  "description": " visual experiment using connected particles",
+  "version": "0.4.0",
+  "description": "A visual experiment using connected particles",
   "main": "index.html",
   "scripts": {},
   "repository": {
