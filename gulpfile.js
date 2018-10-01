@@ -22,7 +22,7 @@ var sketchFolder = "sketch/";
 var sketchFiles = [
 	'particle.js',
 	'particle-handler.js',
-	'emptyp5project.js'
+	'connected.js'
 ];
 
 sketchFiles.forEach(function(fileName, index) {
